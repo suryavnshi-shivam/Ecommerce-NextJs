@@ -75,7 +75,7 @@ const editCart = () => {
                     </div>
                 </div>
                 <div className="px-5 w-[30%]  right-0">
-                        <h1 className="text-xl font-bold">ORDER SUMMARY</h1>
+                        <h1 className="text-xl font-bold text-center">ORDER SUMMARY</h1>
                         <div className="inline-flex justify-between my-5" style={{width:" -webkit-fill-available"}}>
                             <p>Coupons</p>
                             <button className=" bg-gray-300 py-2 px-4 rounded hover:bg-gray-200">ADD COUPON</button>
