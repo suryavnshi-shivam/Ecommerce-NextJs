@@ -51,10 +51,10 @@ const Footer = () => {
             <div className="text-center">
                 <p className="text-lg font-extrabold ">PAYMENT PARTNER</p>
                 <div className=" grid grid-cols-4 sd:grid-cols-2 my-2 mx-[80px] gap-2">
-                    <Image src="/phone pay.png" width={80} height={0} />
-                    <Image src="/pytam.jpg" width={80} height={0} />
-                    <Image src="/visa-payment-card1873.jpg" width={80} height={0} />
-                    <Image src="/hdfc.png" width={80} height={0} />
+                    <Image alt="footer" src="/phone pay.png" width={80} height={0} />
+                    <Image alt="footer" src="/pytam.jpg" width={80} height={0} />
+                    <Image alt="footer" src="/visa-payment-card1873.jpg" width={80} height={0} />
+                    <Image alt="footer" src="/hdfc.png" width={80} height={0} />
                 </div>
             </div>
             <div className="sd:text-center lg:text-start">
@@ -80,10 +80,10 @@ const Footer = () => {
             <div className="sd:text-center lg:text-start">
                 <p className="text-lg font-extrabold">FOLLOW US</p>
                 <div className="inline-flex md:w-28 sm:w-28 gap-2  flex-wrap">
-                    <Link href="/https://www.facebook.com/golu.mishra.716970"><Image src="/facebook.png" width={50} height={0} /></Link>
-                    <Link href="/https://instagram.com/____s_s_m____?utm_source=qr&igshid=NGExMmI2YTkyZg%3D%3D"><Image src="/Instagram_logo.png" width={50} height={0} /></Link>
-                    <Link href="/https://twitter.com/Mishra91352?t=EptfiHzci8zqmxb4zaVRfQ&s=09"><Image src="/twitter.png" width={50} height={0} /></Link>
-                    <Link href="/www.youtube.com"><Image src="/youtube.png" width={50} height={0} /></Link>
+                    <Link href="/https://www.facebook.com/golu.mishra.716970"><Image alt="footer" src="/facebook.png" width={50} height={0} /></Link>
+                    <Link href="/https://instagram.com/____s_s_m____?utm_source=qr&igshid=NGExMmI2YTkyZg%3D%3D"><Image alt="footer" src="/Instagram_logo.png" width={50} height={0} /></Link>
+                    <Link href="/https://twitter.com/Mishra91352?t=EptfiHzci8zqmxb4zaVRfQ&s=09"><Image alt="footer" src="/twitter.png" width={50} height={0} /></Link>
+                    <Link href="/www.youtube.com"><Image alt="footer" src="/youtube.png" width={50} height={0} /></Link>
                 </div>
             </div>
         </div>

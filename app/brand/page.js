@@ -1,3 +1,4 @@
+"use client"
 import FilterSelect from "@/components/select/FilterSelect"
 import Image from "next/image"
 import { BsFilterLeft } from "react-icons/bs"
@@ -6,7 +7,7 @@ const Brand = () => {
     return (
         <div className="p-5">
         <div className="w-full text-center">
-            <Image src="/menbackground.png" width={1500} height={0} style={{height:"300px"}} />
+            <Image  alt='brand' src="/menbackground.png" width={1500} height={0} style={{height:"300px"}} />
         </div>
         <div className="w-full inline-flex flex-wrap justify-between">
             <div className="lg:w-32 sd:w-[-50px] inline-flex gap-2 text-center my-2 font-bold">

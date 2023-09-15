@@ -73,9 +73,9 @@ const CartModal = ({ showModal, setShowModal }) => {
                                 </div>
                                 <div className="">
                                     {cart?.cartItems?.map((el) => (
-                                        <div className="w-[26rem] inline-flex gap-5 p-1 border-b-2  justify-start">
+                                        <div key={el.id} className="w-[26rem] inline-flex gap-5 p-1 border-b-2  justify-start">
                                             <div className="w-[80px]">
-                                                <Image src={el.thumbnail} style={{ height: "100px" }} width={100} height={100} />
+                                                <Image alt="model" src={el.thumbnail} style={{ height: "100px" }} width={100} height={100} />
                                             </div>
                                             <div className="text-gray-600  ">
                                                 <ul>

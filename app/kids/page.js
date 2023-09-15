@@ -31,7 +31,7 @@ const Kinds = () => {
     return (
         <div className="p-5">
             <div className="w-full text-center">
-                <Image src="/kidsbackground.png" width={1500} height={0} style={{ height: "300px" }} />
+                <Image alt="kid" src="/kidsbackground.png" width={1500} height={0} style={{ height: "300px" }} />
             </div>
             <div className="grid grid-cols-3 my-2 sd:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
                 <div className=" inline-flex gap-2  font-bold">
@@ -240,7 +240,7 @@ const Kinds = () => {
                 <div className="inline-flex flex-wrap lg:w-[1115px] md:w-[800px] sd:w-[23rem] lg:pl-[65px]">
                     <div className="lg:w-52 sd:sd:w-[23rem] md:w-[362px] p-2">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -252,7 +252,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -264,7 +264,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2 ">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -276,7 +276,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2 ">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -288,7 +288,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2 ">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -300,7 +300,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2 ">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -312,7 +312,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2 ">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -324,7 +324,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2 ">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -336,7 +336,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2 ">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>
@@ -348,7 +348,7 @@ const Kinds = () => {
                     </div>
                     <div className="lg:w-52 sd:w-[23rem] md:w-[362px] p-2 ">
                         <Link href='#'>
-                            <Image
+                            <Image alt="kid"
                                 style={{ width: '500px', height: "200px" }}
                                 src='/kidsshoes.png' width={100} height={0} />
                         </Link>

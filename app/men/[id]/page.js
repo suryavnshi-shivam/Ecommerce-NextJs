@@ -14,9 +14,9 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import { Store } from "@/redux/Store";
 import { v4 as uuidv4 } from 'uuid';
 import ProductDetailsMetaTag from "@/components/ProductDetailsMetaTag";
-const menProductDetails = ({ params }) => {
+const MenProductDetails = ({ params }) => {
     const { state, dispatch } = useContext(Store)
-    localStorage.setItem("CartItems", JSON.stringify(state.cart.cartItems));
+    // localStorage.setItem("CartItems", JSON.stringify(state.cart.cartItems));
     const [product, setProduct] = useState();
     const [pincode, setPincode] = useState();
     const [selectedSize, setSelectedSize] = useState('5');
@@ -401,4 +401,4 @@ const menProductDetails = ({ params }) => {
         </div>
     )
 }
-export default menProductDetails;                                                                                                                                                                                          
+export default MenProductDetails;                                                                                                                                                                                          

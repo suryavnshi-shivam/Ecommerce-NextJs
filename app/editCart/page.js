@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsFillArrowDownSquareFill } from "react-icons/bs";
 
-const editCart = () => {
-    const storedCart = localStorage.getItem("CartItems");
-    const cartItems = JSON.parse(storedCart);
-    console.log(cartItems)
+const EditCartItems = () => {
+    // const storedCart = localStorage.getItem("CartItems");
+    // const cartItems = JSON.parse(storedCart);
+    // console.log(cartItems)
     // const onDeleteCartItem = (id) => {
     //     // console.log(id)
     //     dispatch({ type: 'REMOVE_ITEM', payload: id });
@@ -27,12 +27,12 @@ const editCart = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {cartItems?.map((item) => (
+                            {/* {cartItems?.map((item) => (
                                 <tr key={item.id}>
                                     <td className="border border-slate-300 px-5">
                                         <div className="w-full inline-flex text-center flex-wrap">
                                             <div className="my-[10%] w-[30%]">
-                                                <img
+                                                <Image
                                                     src={item.images[0]}
                                                     alt={item.title}
                                                     style={{ marginLeft: "auto" }}
@@ -63,7 +63,7 @@ const editCart = () => {
                                     <td className="border border-slate-300 px-5">0.00</td>
                                     <td className="border border-slate-300 px-5">14999.00</td>
                                 </tr>
-                            ))}
+                            ))} */}
                         </tbody>
                     </table>
                     <div className="text-end px-84 py-5">
@@ -107,4 +107,4 @@ const editCart = () => {
         </div>
     )
 }
-export default editCart;
+export default EditCartItems;

@@ -79,7 +79,7 @@ const Men = () => {
     return (
         <div className="p-5">
             <div className="grid grid-cols-1  xl:grid-cols-1 text-center">
-                <Image src="/menbackground.png" width={5000} height={0} style={{ height: "300px" }} />
+                <Image alt="men" src="/menbackground.png" width={5000} height={0} style={{ height: "300px" }} />
             </div>
             <div className="grid grid-cols-3 my-2 sd:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
                 <div className=" inline-flex gap-2  font-bold">

@@ -15,7 +15,7 @@ const Navbar = () => {
     // console.log(cart)
     const [showTooltip, setShowTooltip] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const storedCart = localStorage.getItem("CartItems");
+    // const storedCart = localStorage.getItem("CartItems");
     const link = [
         {
             id: 1,

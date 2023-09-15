@@ -1,6 +1,6 @@
 import Navbar from '@/components/navbar/Navbar';
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
 import Footer from '@/components/footer/Footer';
 import React from "react";
 import { Store, StoreProvider } from '@/redux/Store';
