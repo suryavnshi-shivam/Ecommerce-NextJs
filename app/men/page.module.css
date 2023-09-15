@@ -1,0 +1,19 @@
+.carousel-container {
+    position: relative;
+    width: 272px; /* Adjust the width as needed */
+    overflow: hidden;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    width: 210px;
+    height: 200px;
+}
+
+.text-center {
+    text-align: center;
+}
