@@ -1,16 +1,19 @@
 "use client"
+import { Store } from "@/redux/Store";
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
 import { BsFillArrowDownSquareFill } from "react-icons/bs";
 
 const EditCartItems = () => {
-    // const storedCart = localStorage.getItem("CartItems");
-    // const cartItems = JSON.parse(storedCart);
-    // console.log(cartItems)
-    // const onDeleteCartItem = (id) => {
-    //     // console.log(id)
-    //     dispatch({ type: 'REMOVE_ITEM', payload: id });
-    // }
+    const { state, dispatch } = useContext(Store)
+    const cart = state.cart
+    
+    const TotalMRP = cart?.cartItems?.reduce((a, c) => a + c.price * c.quantity, 0);
+    const onDeleteCartItem = (id) => {
+        const updatedCartItems = state.cart.cartItems.filter(item => item.id !== id);
+        dispatch({ type: 'REMOVE_ITEM', payload: { cartItems: updatedCartItems } });
+    };
     return (
         <div>
             <h1 className="text-center my-2 font-extrabold p-2 text-xl">Shopping Cart</h1>
@@ -27,13 +30,13 @@ const EditCartItems = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* {cartItems?.map((item) => (
+                            {cart?.cartItems?.map((item) => (
                                 <tr key={item.id}>
                                     <td className="border border-slate-300 px-5">
                                         <div className="w-full inline-flex text-center flex-wrap">
                                             <div className="my-[10%] w-[30%]">
                                                 <Image
-                                                    src={item.images[0]}
+                                                    src={item.images[1]}
                                                     alt={item.title}
                                                     style={{ marginLeft: "auto" }}
                                                     width={50}
@@ -43,14 +46,14 @@ const EditCartItems = () => {
                                             <div className="w-[70%] px-5 mt-[10%]">
                                                 <p>{item.title}</p>
                                                 <p className="inline-flex gap-2">
-                                                    Size: {item.size}
+                                                    Size: {item.selectedSize}
                                                     <span className="mt-1 cursor-pointer">
                                                         <BsFillArrowDownSquareFill />
                                                     </span>
                                                 </p>
                                                 <br />
                                                 <button
-                                                    // onClick={() => onDeleteCartItem(item.id)}
+                                                    onClick={() => onDeleteCartItem(item.id)}
                                                     className="text-xs bg-gray-400 text-white my-2 border border-spacing-1 border-gray-300 p-1 px-2 rounded"
                                                 >
                                                     Remove
@@ -61,9 +64,9 @@ const EditCartItems = () => {
                                     <td className="border border-slate-300 px-5">{item.price}</td>
                                     <td className="border border-slate-300 px-5">{item.quantity}</td>
                                     <td className="border border-slate-300 px-5">0.00</td>
-                                    <td className="border border-slate-300 px-5">14999.00</td>
+                                    <td className="border border-slate-300 px-5">{item.price *item.quantity}</td>
                                 </tr>
-                            ))} */}
+                            ))}
                         </tbody>
                     </table>
                     <div className="text-end px-84 py-5">
@@ -83,7 +86,7 @@ const EditCartItems = () => {
                         <h1 className="text-xl font-bold">PRICE DETAILS</h1>
                         <div className="gap-5 inline-flex justify-between mt-5" style={{width:" -webkit-fill-available"}}>
                             <p>Total MRP</p>
-                            <p className="py-2 px-1">Rs. 14999.00</p>
+                            <p className="py-2 px-1">Rs. {TotalMRP}</p>
                         </div>
                         <div className="gap-5 inline-flex justify-between " style={{width:" -webkit-fill-available"}}>
                             <p>Total Discount on MRP</p>
@@ -99,7 +102,7 @@ const EditCartItems = () => {
                         </div>
                         <div className="gap-5 inline-flex justify-between mb-5" style={{width:" -webkit-fill-available"}}>
                             <p>Order Total</p>
-                            <p className="py-2 px-1">Rs. 14999.00</p>
+                            <p className="py-2 px-1">Rs. {TotalMRP}</p>
                         </div>
                         <button className="bg-gray-300 p-3 rounded w-[100%] hover:bg-gray-200">CHECKOUT</button>
                 </div>

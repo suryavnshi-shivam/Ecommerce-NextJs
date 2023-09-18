@@ -16,7 +16,6 @@ import { v4 as uuidv4 } from 'uuid';
 import ProductDetailsMetaTag from "@/components/ProductDetailsMetaTag";
 const MenProductDetails = ({ params }) => {
     const { state, dispatch } = useContext(Store)
-    // localStorage.setItem("CartItems", JSON.stringify(state.cart.cartItems));
     const [product, setProduct] = useState();
     const [pincode, setPincode] = useState();
     const [selectedSize, setSelectedSize] = useState('5');
