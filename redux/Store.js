@@ -23,13 +23,17 @@ function reducer(state, action) {
 }
 
 export function StoreProvider({ children }) {
-  const [state, dispatch] = useReducer(
-    reducer,
-    JSON.parse(localStorage.getItem("store")) || initialState
-  );
+    const [state, dispatch] = useReducer(
+        reducer,
+        typeof window !== 'undefined'
+        ? JSON.parse(localStorage.getItem("store")) || initialState
+        : initialState
+        );
 
   useEffect(() => {
-    localStorage.setItem("store", JSON.stringify(state));
+      if (typeof window !== 'undefined') {
+          localStorage.setItem("store", JSON.stringify(state));
+      }
   }, [state]);
 
   const value = { state, dispatch };
