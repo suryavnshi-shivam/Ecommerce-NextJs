@@ -1,8 +1,9 @@
+"use client"
 import Navbar from '@/components/navbar/Navbar';
 import './globals.css'
 import { Inter } from 'next/font/google';
 import Footer from '@/components/footer/Footer';
-import React from "react";
+import React, { useEffect } from "react";
 import { Store, StoreProvider } from '@/redux/Store';
 import Head from 'next/head';
 const inter = Inter({ subsets: ['latin'] })
@@ -11,7 +12,9 @@ export const metadata = {
   title: 'SHOES ADDA',
   description: 'Welcome to our SHOES ADD website, your ultimate destination for footwear enthusiasts and fashion connoisseurs! Immerse yourself in a world of style, comfort, and endless choices as you explore our meticulously curated collection of shoes for every occasion and every taste.Step into a realm where fashion meets functionality. Our Shoe Store offers an unparalleled assortment of footwear that seamlessly blends trendsetting designs with the finest craftsmanship. Whether you'
 }
-
+useEffect(() => {
+  const storedData = localStorage.getItem("store");
+}, []);
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
