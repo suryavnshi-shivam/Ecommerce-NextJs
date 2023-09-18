@@ -53,7 +53,7 @@ const Footer = () => {
                 <div className=" grid grid-cols-4 sd:grid-cols-2 my-2 mx-[80px] gap-2">
                     <Image alt="footer" src="/phone pay.png" width={80} height={0} />
                     <Image alt="footer" src="/pytam.jpg" width={80} height={0} />
-                    <Image alt="footer" src="/visa-payment-card1873.jpg" width={80} height={0} />
+                    <Image alt="footer" src="/pytam.jpg" width={80} height={0} />
                     <Image alt="footer" src="/hdfc.png" width={80} height={0} />
                 </div>
             </div>

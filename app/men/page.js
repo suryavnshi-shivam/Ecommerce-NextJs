@@ -98,9 +98,9 @@ const Men = () => {
                 </div>
             </div>
             <div className="w-full inline-flex flex-wrap">
-                <div className="lg:w-48 sd:w-[23rem] md:w-[720px] md:pr-10">
+                <div className="lg:w-48 sd:w-[-webkit-fill-available] md:w-[-webkit-fill-available] ">
                     <ul>
-                        <div className="lg:w-52 sd:w-[23rem] md:w-[720px] px-2 inline-flex justify-between border border-spacing-1">
+                        <div className="lg:w-52 sd:w-[-webkit-fill-available] md:w-[-webkit-fill-available] px-2 inline-flex justify-between border border-spacing-1">
                             <div>
                                 <li className="p-5" >
                                     Size
@@ -144,7 +144,7 @@ const Men = () => {
                                 </li>
                             </ul>
                         }
-                        <div className="lg:w-52 sd:w-[23rem] md:w-[720px] px-2 inline-flex justify-between border border-spacing-1">
+                        <div className="lg:w-52 sd:w-[-webkit-fill-available] md:w-[-webkit-fill-available] px-2 inline-flex justify-between border border-spacing-1">
                             <div>
                                 <li className="p-5" >
                                     Colours
@@ -183,7 +183,7 @@ const Men = () => {
                                 </li>
                             </ul>
                         }
-                        <div className="lg:w-52 sd:w-[23rem] md:w-[720px] px-2 inline-flex justify-between border border-spacing-1">
+                        <div className="lg:w-52 sd:w-[-webkit-fill-available] md:w-[-webkit-fill-available] px-2 inline-flex justify-between border border-spacing-1">
                             <div>
                                 <li className="p-5" >
                                     Upper Materail
@@ -219,7 +219,7 @@ const Men = () => {
                                 </li>
                             </ul>
                         }
-                        <div className="lg:w-52 sd:w-[23rem] md:w-[720px] px-2 inline-flex justify-between border border-spacing-1">
+                        <div className="lg:w-52 sd:w-[-webkit-fill-available] md:w-[-webkit-fill-available] px-2 inline-flex justify-between border border-spacing-1">
                             <div>
                                 <li className="p-5" >
                                     Lining Material
@@ -261,7 +261,7 @@ const Men = () => {
                                 <label for="cow leather" className="ml-2">polyester/leather</label>
                             </li>
                         </ul>}
-                        <div className="lg:w-52 sd:sd:w-[23rem] md:w-[720px] px-2 inline-flex justify-between border border-spacing-1">
+                        <div className="lg:w-52 sd:w-[-webkit-fill-available] md:w-[-webkit-fill-available] px-2 inline-flex justify-between border border-spacing-1">
                             <div>
                                 <li className="p-5" >
                                     Occasion
@@ -288,9 +288,9 @@ const Men = () => {
                 {noData && <div className="text-center ml-[40%] mt-[10%]">
                     {noData}
                 </div>}
-                {!loder ? <div className="inline-flex flex-wrap lg:w-[1115px] md:w-[800px] sd:w-[23rem] lg:pl-[55px]">
+                {!loder ? <div className="inline-flex flex-wrap lg:w-[1115px] md:w-[800px] sd:w-[-webkit-fill-available] lg:pl-[55px]">
                     {!noData && data.slice(0, itemsToShow).map((item) => (
-                        <div key={item._id} className="lg:w-64 lg:mt-1 lg:mx-1 sd:w-[23rem] shadow shadow-slate-900  border border-spacing-1 rounded md:w-[362px] p-2">
+                        <div key={item._id} className="lg:w-64 lg:mt-1 lg:mx-1 sd:w-[-webkit-fill-available] shadow shadow-slate-900  border border-spacing-1 rounded md:w-[362px] p-2">
                             <Link href={`/men/${item._id}`}>
                                 <Image
                                     style={{ width: '500px', height: '200px' }}
