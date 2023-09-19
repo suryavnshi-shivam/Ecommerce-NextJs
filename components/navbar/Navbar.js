@@ -2,7 +2,7 @@
 import Link from "next/link"
 import { FaUser } from 'react-icons/fa';
 import { BsCartFill } from 'react-icons/bs';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from './navbar.module.css'
 import { useRouter } from "next/navigation";
 import CartModal from "../comman/Modals/CartModal";
@@ -12,10 +12,14 @@ const Navbar = () => {
     const router = useRouter()
     const { state, dispatch } = useContext(Store)
     const cart = state.cart
-    // console.log(cart)
+    const [isClient, setIsClient] = useState(false)
+
     const [showTooltip, setShowTooltip] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    // const storedCart = localStorage.getItem("CartItems");
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
     const link = [
         {
             id: 1,
@@ -72,13 +76,13 @@ const Navbar = () => {
                         <div>
                             <BsCartFill />
                         </div>
-                        <div className="w-full text-center">
+                        {isClient ? <div className="w-full text-center">
                             {cart?.cartItems?.length > 0 && (
                                 <span className="w-8 absolute sd:top-[67px] sd:right-[289px] lg:top-[10px] lg:right-[40px] rounded-full py-[2px] text-xs font-bold border border-spacing-1">
                                     {cart?.cartItems?.reduce((a, c) => a + c.quantity, 0)}
                                 </span>
                             )}
-                        </div>
+                        </div> : null}
                     </button>
                     <CartModal showModal={showModal} setShowModal={setShowModal} />
                 </div>

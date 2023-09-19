@@ -57,8 +57,8 @@ const CartModal = ({ showModal, setShowModal }) => {
                     <div
                         className="justify-end items-start mt-8 flex fixed overflow-x-hidden  overflow-scroll inset-0 z-50"
                     >
-                        <div className="w-[27rem] my-6">
-                            <div className="rounded-lg shadow-lg  flex-col bg-white p-2">
+                        <div className="w-[27rem]  my-6">
+                            <div className="rounded-lg shadow-lg lg:m-[0%] flex-col bg-white p-2 sd:m-[15%]">
                                 <div className="grid grid-cols-2 items-start justify-between p-1 border-b border-solid border-slate-200 rounded-t">
                                     <div className="text-sm text-slate-500 font-extrabold">
                                         <p>
@@ -73,7 +73,7 @@ const CartModal = ({ showModal, setShowModal }) => {
                                 </div>
                                 <div className="">
                                     {cart?.cartItems?.map((el) => (
-                                        <div key={el.id} className="w-[26rem] inline-flex gap-5 p-1 border-b-2  justify-start">
+                                        <div key={el.id} className="lg:w-[26rem] sd:w-[15rem] inline-flex gap-5 p-1 border-b-2  justify-start">
                                             <div className="w-[80px]">
                                                 <Image alt="model" src={el.thumbnail} style={{ height: "100px" }} width={100} height={100} />
                                             </div>
@@ -99,7 +99,7 @@ const CartModal = ({ showModal, setShowModal }) => {
                                     ))}
                                 </div>
                                 {cart?.cartItems?.length <= 0 && <div className="text-center text-black">No Item in cart</div>}
-                                <div className="flex items-center justify-around p-1 border-t border-solid border-slate-200 rounded-b">
+                                <div className="flex items-center lg:flex-row sd:flex-col justify-around p-1 border-t border-solid border-slate-200 rounded-b">
                                     <button
                                         className="text-black p-1 border border-spacing-2 rounded bg-red-200  font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
