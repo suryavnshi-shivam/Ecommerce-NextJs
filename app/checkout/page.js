@@ -8,11 +8,11 @@ const Checkout = () => {
     const { state, dispatch } = useContext(Store)
     const cart = state.cart
     const [isClient, setIsClient] = useState(false)
-    const [toggleGuest,setToggleGuest] = useState(false)
+    const [toggleGuest,setToggleGuest] = useState(true)
     const TotalMRP = cart?.cartItems?.reduce((a, c) => a + c.price * c.quantity, 0);
 
     const onGuestHandler = () => {
-        setToggleGuest(!toggleGuest)
+        setToggleGuest(false)
     }
     useEffect(() => {
         setIsClient(true)
@@ -64,7 +64,7 @@ const Checkout = () => {
                 <h1>REVIEW & PAYMENTS</h1>
             </div>
             {isClient && <div className="grid lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1  p-5 sd:grid-cols-1">
-                {toggleGuest ? <div className=" text-start p-5">
+                {toggleGuest === true ? <div className=" text-start p-5">
                     <h1 className="text-xl font-bold my-1">LOGIN</h1>
                     <p className="my-1">Logged in customers get to avail <span className=" text-red-500">loyalty discounts!</span></p>
                     <input
