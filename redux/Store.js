@@ -17,6 +17,8 @@ function reducer(state, action) {
       return { ...state, cart: action.payload };
     case "DECREMENT_QTY":
       return { ...state, cart: action.payload };
+    case "UPDATE_SIZE":
+      return { ...state, cart: action.payload };
     default:
       return state;
   }

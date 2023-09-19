@@ -1,15 +1,17 @@
 "use client"
+import CartSizeModel from "@/components/Modals/CartSizeModel";
 import { Store } from "@/redux/Store";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { BsFillArrowDownSquareFill } from "react-icons/bs";
-
 const EditCartItems = () => {
     const { state, dispatch } = useContext(Store)
     const [isClient, setIsClient] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const [cartData,setCartData] = useState('')
     const cart = state.cart
-    const customClass = cart?.cartItems?.length > 1 ? "px-5 lg:w-[30%] right-0 lg:absolute lg:bottom-[37px] sd:grid sd:grid-cols-1 " : "sd:grid sd:grid-cols-1  lg:w-[30%]" 
+    const customClass = cart?.cartItems?.length > 1 ? "px-5 lg:w-[30%] right-0 lg:absolute lg:bottom-[37px] sd:grid sd:grid-cols-1 " : "sd:grid sd:grid-cols-1  lg:w-[30%]"
     const TotalMRP = cart?.cartItems?.reduce((a, c) => a + c.price * c.quantity, 0);
     const onDeleteCartItem = (id) => {
         const updatedCartItems = state.cart.cartItems.filter(item => item.id !== id);
@@ -18,6 +20,10 @@ const EditCartItems = () => {
     useEffect(() => {
         setIsClient(true)
     }, [])
+    const onSizeHandler = (item) => {
+        setShowModal(true)
+        setCartData(item)
+    }
     return (
         <div>
             <h1 className="text-center my-2 font-extrabold p-2 text-lg">Shopping Cart</h1>
@@ -53,7 +59,9 @@ const EditCartItems = () => {
                                                 <p className="inline-flex gap-2">
                                                     Size: {item.selectedSize}
                                                     <span className="mt-1 cursor-pointer">
-                                                        <BsFillArrowDownSquareFill />
+                                                        <button onClick={() => onSizeHandler(item)}>
+                                                            <BsFillArrowDownSquareFill />
+                                                        </button>
                                                     </span>
                                                 </p>
                                                 <br />
@@ -122,6 +130,7 @@ const EditCartItems = () => {
                     <span className="sr-only">Loading...</span>
                 </div>
             }
+            <CartSizeModel showModal={showModal} setShowModal={setShowModal} cartData={cartData}/>
         </div>
     )
 }

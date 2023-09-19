@@ -5,7 +5,7 @@ import { BsCartFill } from 'react-icons/bs';
 import { useContext, useEffect, useState } from "react";
 import styles from './navbar.module.css'
 import { useRouter } from "next/navigation";
-import CartModal from "../comman/Modals/CartModal";
+import CartModal from "../Modals/CartModal";
 import { Store } from "@/redux/Store";
 
 const Navbar = () => {
