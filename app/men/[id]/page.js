@@ -14,6 +14,7 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import { Store } from "@/redux/Store";
 import { v4 as uuidv4 } from 'uuid';
 import ProductDetailsMetaTag from "@/components/ProductDetailsMetaTag";
+import Link from "next/link";
 const MenProductDetails = ({ params }) => {
     const { state, dispatch } = useContext(Store)
     const [product, setProduct] = useState();
@@ -220,7 +221,9 @@ const MenProductDetails = ({ params }) => {
                             </button>
                         </div>
                         <div>
-                            <button className="uppercase font-semibold border border-spacing-1  border-slate-400 px-5 py-3 rounded-3xl bg-orange-500 text-white">Buy Now</button>
+                            <button className="uppercase font-semibold border border-spacing-1  border-slate-400 px-5 py-3 rounded-3xl bg-orange-500 text-white">
+                                <Link href="/checkout">  Buy Now </Link>
+                            </button>
                         </div>
                     </div>
                     <h1 className="p-3  font-extrabold">DELIVERY OPTIONS</h1>

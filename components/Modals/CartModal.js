@@ -1,5 +1,6 @@
 import { Store } from "@/redux/Store";
 import Image from "next/image";
+import Link from "next/link";
 import { useContext } from "react";
 
 
@@ -107,17 +108,18 @@ const CartModal = ({ showModal, setShowModal }) => {
                                     >
                                         close
                                     </button>
-                                    <button
+                                    {itemInCart > 0 &&<button
                                         className="text-black p-1 border border-spacing-2 rounded border-black  font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
                                     >
-                                        <a href="/editCart">Edit Cart</a>
-                                    </button>
+                                         <a href="/editCart">Edit Cart</a>
+                                    </button>}
                                     <button
                                         className="bg-slate-500 text-white active:bg-slate-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                         type="button"
+                                        onClick={() => setShowModal(false)}
                                     >
-                                        Checkout
+                                      <Link href="/checkout">checkout</Link>   
                                     </button>
                                 </div>
                             </div>
