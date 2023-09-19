@@ -12,7 +12,7 @@ const Checkout = () => {
     const TotalMRP = cart?.cartItems?.reduce((a, c) => a + c.price * c.quantity, 0);
 
     const onGuestHandler = () => {
-        setToggleGuest(false)
+        setToggleGuest(!toggleGuest)
     }
     useEffect(() => {
         setIsClient(true)
