@@ -1,12 +1,15 @@
 "use client"
+import SeparateForm from "@/components/SeparateForm"
 import { Store } from "@/redux/Store"
 import Image from "next/image"
 import Link from "next/link"
 import { useContext, useEffect, useState } from "react"
+import { Controller, useForm } from "react-hook-form"
 
 const Checkout = () => {
     const { state, dispatch } = useContext(Store)
     const cart = state.cart
+    const { control, handleSubmit, formState: { errors } } = useForm();
     const [isClient, setIsClient] = useState(false)
     const [toggleGuest,setToggleGuest] = useState(true)
     const TotalMRP = cart?.cartItems?.reduce((a, c) => a + c.price * c.quantity, 0);
@@ -57,6 +60,9 @@ const Checkout = () => {
         const updatedCartItems = state.cart.cartItems.filter(item => item.id !== id);
         dispatch({ type: 'REMOVE_ITEM', payload: { cartItems: updatedCartItems } });
     };
+    const onSubmit = (data) => {
+        console.log(data);
+      };
     return (
         <div>
             <div className="grid grid-cols-2 text-center my-2 font-extrabold p-2 text-lg bg-slate-300">
@@ -67,13 +73,7 @@ const Checkout = () => {
                 {toggleGuest === true ? <div className=" text-start p-5">
                     <h1 className="text-xl font-bold my-1">LOGIN</h1>
                     <p className="my-1">Logged in customers get to avail <span className=" text-red-500">loyalty discounts!</span></p>
-                    <input
-                        className="p-2 my-1 border border-spacing-1 border-slate-400 rounded"
-                        placeholder="Enter your email address"
-                    />
-                    <div className="text-end">
-                        <button className="bg-slate-300 p-2 px-4 rounded">GET OTP</button>
-                    </div>
+                    <SeparateForm />
                     <div>
                         <h1 className="text-lg font-bold my-1">IN A HURRY ?</h1>
                         <div className="text-center p-2 hover:bg-slate-300 border rounded border-spacing-1 border-slate-400">
@@ -82,93 +82,279 @@ const Checkout = () => {
                     </div>
                 </div> :
                     <div className="text-center px-32">
-                        <div className="my-2">
-                            <input
-                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
-                                placeholder="Enter Mobile Number"
-                            />
-                        </div>
-                        <div className="my-2">
-                            <input
-                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
-                                placeholder="Email"
-                            />
-                        </div>
-                        <div className="my-2">
-                            <input
-                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
-                                placeholder="Full Name"
-                            />
-                        </div>
-                        <div className="my-2">
-                            <input
-                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
-                                placeholder="Flat Bulding No"
-                            />
-                        </div>
-                        <div className="my-2">
-                            <input
-                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
-                                placeholder="Street Address"
-                            />
-                        </div>
-                        <div className="my-2">
-                            <input
-                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
-                                placeholder="Landmark"
-                            />
-                        </div>
-                        <div className="my-2">
-                            <input
-                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
-                                placeholder="PIN Code"
-                            />
-                        </div>
-                        <div className="my-2">
-                            <select className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                        </div>
-                        <div className="my-2">
-                            <select className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                        </div>
-                        <div className="my-2">
-                            <input
-                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
-                                value='State'
-                            />
-                        </div>
-                        <div className="text-start">
-                            <p>Select Address Type</p>
-                            <div className="gap-2 grid grid-cols-2 p-2">
-                                <div className="">
-                                    <input type="radio" id="home" name="location" className="" />
-                                    <label htmlFor="home" className="pl-1">Home</label>
+                        <form onSubmit={handleSubmit(onSubmit)} className="text-center ">
+                            <div className="my-2">
+                                <Controller
+                                    name="mobileNumber"
+                                    control={control}
+                                    rules={{
+                                        required: 'Mobile Number is required*',
+                                        pattern: {
+                                            value: /^[0-9]{10,}$/,
+                                            message: 'Invalid Mobile Number (at least 10 digits, numbers only)',
+                                        },
+                                    }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <input
+                                            className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                            placeholder="Enter Mobile Number*"
+                                            value={value}
+                                            onChange={(e) => {
+                                                const numericValue = e.target.value.replace(/[^0-9+]/g, '');
+                                                onChange(numericValue);
+                                            }}
+                                        />
+                                    )}
+                                />
+                            </div>
+                            {errors.email && <span className="text-red-600">{errors?.mobileNumber?.message}</span>}
+                            <div className="my-2">
+                                <Controller
+                                    name="email"
+                                    control={control}
+                                    rules={{
+                                        required: 'Email is required',
+                                        pattern: {
+                                            value: /^\S+@\S+$/i,
+                                            message: 'Invalid email address',
+                                        },
+                                    }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <input
+                                            className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                            placeholder="Email*"
+                                            value={value}
+                                            onChange={(e) => onChange(e.target.value)}
+                                        />
+                                    )}
+                                />
+                            </div>
+                            {errors.email && <span className="text-red-600">{errors?.email?.message}</span>}
+                            <div className="my-2">
+                                <Controller
+                                    name="fullName"
+                                    control={control}
+                                    rules={{ required: 'Full Name is required*' }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <div>
+                                            <input
+                                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                                placeholder="Full Name*"
+                                                value={value}
+                                                onChange={(e) => onChange(e.target.value)}
+                                            />
+                                        </div>
+                                    )}
+                                />
+                                {errors.fullName && (
+                                    <span className=" text-red-600 px-3">{errors?.fullName?.message}</span>
+                                )}
+                            </div>
+
+                            <div className="my-2">
+                                <Controller
+                                    name="flatBuildingNo"
+                                    control={control}
+                                    rules={{ required: 'Flat Building No is required*' }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <div>
+                                            <input
+                                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                                placeholder="Flat Building No*"
+                                                value={value}
+                                                onChange={(e) => onChange(e.target.value)}
+                                            />
+                                        </div>
+                                    )}
+                                />
+                            </div>
+                            {errors.fullName && (
+                                    <span className=" text-red-600 px-3">{errors?.flatBuildingNo?.message}</span>
+                                )}
+                            <div className="my-2">
+                                <Controller
+                                    name="streetAddress"
+                                    control={control}
+                                    rules={{ required: 'Street Address is required*' }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <div>
+                                            <input
+                                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                                placeholder="Street Address*"
+                                                value={value}
+                                                onChange={(e) => onChange(e.target.value)}
+                                            />
+                                        </div>
+                                    )}
+                                />
+                                {errors.streetAddress && (
+                                    <span className=" text-red-600 px-3">{errors?.streetAddress?.message}</span>
+                                )}
+                            </div>
+                            <div className="my-2">
+                                <Controller
+                                    name="landmark"
+                                    control={control}
+                                    rules={{ required: 'Landmark is required*' }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <div>
+                                            <input
+                                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                                placeholder="Landmark"
+                                                value={value}
+                                                onChange={(e) => onChange(e.target.value)}
+                                            />
+                                        </div>
+                                    )}
+                                />
+                            </div>
+                            {errors.streetAddress && (
+                                    <span className=" text-red-600 px-3">{errors?.landmark?.message}</span>
+                                )}
+                            <div className="my-2">
+                                <Controller
+                                    name="pinCode"
+                                    control={control}
+                                    rules={{ required: 'PIN Code is required*', pattern: /^[0-9]{6}$/ }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <div>
+                                            <input
+                                                className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                                placeholder="PIN Code*"
+                                                value={value}
+                                                onChange={(e) => onChange(e.target.value)}
+                                            />
+                                        </div>
+                                    )}
+                                />
+                                {errors.pinCode && (
+                                    <span className=" text-red-600 px-3">{errors?.pinCode?.message}</span>
+                                )}
+                            </div>
+                            <div className="my-2">
+                                <Controller
+                                    name="selectOption1"
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <select
+                                            className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                            value={value}
+                                            onChange={(e) => onChange(e.target.value)}
+                                        >
+                                            <option value="" disabled selected>
+                                                Please Select Area
+                                            </option>
+                                            <option value="1">Option 1</option>
+                                            <option value="2">Option 2</option>
+                                            <option value="3">Option 3</option>
+                                        </select>
+                                    )}
+                                />
+                            </div>
+                            <div className="my-2">
+                                <Controller
+                                    name="selectOption2"
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <select
+                                        className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                        value={value}
+                                        onChange={(e) => onChange(e.target.value)}
+                                    >
+                                        <option value="" disabled selected>
+                                            Please Select City
+                                        </option>
+                                        <option value="1">Option 1</option>
+                                        <option value="2">Option 2</option>
+                                        <option value="3">Option 3</option>
+                                    </select>
+                                    )}
+                                />
+                            </div>
+                            <div className="my-2">
+                                <Controller
+                                    name="state"
+                                    control={control}
+                                    rules={{ required: true }}
+                                    render={({ field: { onChange, value } }) => (
+                                        <input
+                                            className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
+                                            placeholder="State"
+                                            value={value}
+                                            onChange={(e) => onChange(e.target.value)}
+                                        />
+                                    )}
+                                />
+                            </div>
+                            <div className="text-start">
+                                <p>Select Address Type</p>
+                                <div className="gap-2 grid grid-cols-2 p-2">
+                                    <div>
+                                        <Controller
+                                            name="addressType"
+                                            control={control}
+                                            rules={{ required: 'Address Type is required*' }}
+                                            render={({ field: { onChange, value } }) => (
+                                                <>
+                                                    <input
+                                                        type="radio"
+                                                        id="home"
+                                                        name="location"
+                                                        value="Home"
+                                                        checked={value === 'Home'}
+                                                        onChange={(e) => onChange(e.target.value)}
+                                                    />
+                                                    <label htmlFor="home" className="pl-1">Home</label>
+                                                </>
+                                            )}
+                                        />
+                                    </div>
+                                    <div>
+                                        <Controller
+                                            name="addressType"
+                                            control={control}
+                                            rules={{ required: 'Address Type is required*' }}
+                                            render={({ field: { onChange, value } }) => (
+                                                <>
+                                                    <input
+                                                        type="radio"
+                                                        id="office"
+                                                        name="location"
+                                                        value="Office"
+                                                        checked={value === 'Office'}
+                                                        onChange={(e) => onChange(e.target.value)}
+                                                    />
+                                                    <label htmlFor="office" className="pl-1">Office</label>
+                                                </>
+                                            )}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="">
-                                    <input type="radio" id="office" name="location" className="" />
-                                    <label htmlFor="office" className="pl-1">Office</label>
+                                {errors.addressType && (
+                                    <span className="text-red-600 px-3">{errors.addressType.message}</span>
+                                )}
+                            </div>
+                            <div className="text-start p-2 inline-flex gap-2">
+                                <input type="checkbox" className="" />
+                                <p className="text-xs">
+                                    I consent to receive promotional SMS, emails, and other communications
+                                </p>
+                            </div>
+                            <div className="p-2 inline-flex gap-2 w-[-webkit-fill-available]">
+                                <div>
+                                    <button onClick={onGuestHandler} className="border border-spacing-1 hover:bg-slate-400 border-slate-300 p-2 rounded">
+                                        BACK
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="submit" className="border border-spacing-1 hover:bg-slate-400 border-slate-300 p-2 rounded">
+                                        CONTINUE
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-                        <div className="text-start p-2 inline-flex gap-2">
-                            <input type="checkbox"  className="" />
-                            <p className="text-xs">I consent to receive promotional SMS, emails, and other communications</p>
-                        </div>
-                        <div className="p-2 inline-flex gap-2 w-[-webkit-fill-available]">
-                            <div>
-                                <button onClick={onGuestHandler} className="border border-spacing-1 hover:bg-slate-400 border-slate-300 p-2 rounded">BACK</button>
-                            </div>
-                            <div>
-                                <button className="border border-spacing-1 hover:bg-slate-400 border-slate-300 p-2 rounded">CONTINUE</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 }
                 <div className="p-5">
