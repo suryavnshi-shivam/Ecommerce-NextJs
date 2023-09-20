@@ -1,6 +1,6 @@
 import { useForm, Controller } from 'react-hook-form';
 
-function YourForm() {
+function SeparateForm() {
   const { control, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
@@ -40,4 +40,4 @@ function YourForm() {
   );
 }
 
-export default YourForm;
+export default SeparateForm;

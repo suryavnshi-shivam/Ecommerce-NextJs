@@ -1,6 +1,8 @@
 "use client"
+import CouponModel from "@/components/Modals/CouponModel"
 import SeparateForm from "@/components/SeparateForm"
 import { Store } from "@/redux/Store"
+import axios from "axios"
 import Image from "next/image"
 import Link from "next/link"
 import { useContext, useEffect, useState } from "react"
@@ -12,14 +14,43 @@ const Checkout = () => {
     const { control, handleSubmit, formState: { errors } } = useForm();
     const [isClient, setIsClient] = useState(false)
     const [toggleGuest,setToggleGuest] = useState(true)
+    const [pincode,setPincode] = useState()
+    const [location, setLocation] = useState(null);
+    const [showModal,setShowModal] = useState(false)
     const TotalMRP = cart?.cartItems?.reduce((a, c) => a + c.price * c.quantity, 0);
-
     const onGuestHandler = () => {
         setToggleGuest(!toggleGuest)
     }
     useEffect(() => {
         setIsClient(true)
-    }, [])
+        if (pincode?.length >= 6) {
+            getPincodeValue(pincode)
+        }
+    }, [pincode])
+
+    const getPincodeValue = (pincode) => {
+        const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+        const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${pincode}&key=${apiKey}`;
+        console.log("API Key:", apiKey);
+        console.log("API URL:", apiUrl);
+        axios
+            .get(apiUrl)
+            .then((response) => {
+                const results = response.data.results;
+                if (results.length > 0) {
+                    const locationData = results[0].geometry.location;
+                    setLocation(locationData);
+                } else {
+                    setLocation(null);
+                }
+            })
+            .catch((error) => {
+                console.error('An error occurred:', error);
+                setLocation(null);
+            });
+    }
+    console.log(location)
+    
     const onAddQty = (el) => {
         const item = state.cart.cartItems.find(item => item.id === el.id && item._id === el._id);
         if (!item) {
@@ -222,7 +253,10 @@ const Checkout = () => {
                                                 className="p-2 w-[-webkit-fill-available] border border-spacing-1 border-slate-500 rounded"
                                                 placeholder="PIN Code*"
                                                 value={value}
-                                                onChange={(e) => onChange(e.target.value)}
+                                                onChange={(e) => {
+                                                    onChange(e.target.value);
+                                                    setPincode(e.target.value);
+                                                  }}
                                             />
                                         </div>
                                     )}
@@ -366,10 +400,13 @@ const Checkout = () => {
                     </div>
                     <div className="grid grid-cols-2 my-1">
                         <h1 className="text-md ">APPLY COUPONS</h1>
-                        <button className="border hover:bg-slate-300 border-spacing-1 border-black rounded p-2 text-sm ">
-                            <Link href='/editCart'>APPLY</Link>
+                        <button 
+                        onClick={() => setShowModal(true)}
+                        className="border hover:bg-slate-300 border-spacing-1 border-black rounded p-2 text-sm ">
+                            APPLY
                         </button>
                     </div>
+                    <CouponModel showModal={showModal} setShowModal={setShowModal} />
                     <div className="grid grid-cols-2 my-2">
                         <h1 className=" text-2xl font-semibold">Price Details</h1>
                         <div className="h-[210px] overflow-scroll">

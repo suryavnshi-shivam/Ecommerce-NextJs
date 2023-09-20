@@ -1,5 +1,5 @@
 'use client'
-import { getProductDetailsById } from "@/api/ProductApi/ProductAPI";
+import { getProductData, getProductDetailsById } from "@/api/ProductApi/ProductAPI";
 import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 import { BiSolidShareAlt } from 'react-icons/bi';
@@ -15,6 +15,8 @@ import { Store } from "@/redux/Store";
 import { v4 as uuidv4 } from 'uuid';
 import ProductDetailsMetaTag from "@/components/ProductDetailsMetaTag";
 import Link from "next/link";
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const MenProductDetails = ({ params }) => {
     const { state, dispatch } = useContext(Store)
     const [product, setProduct] = useState();
@@ -26,10 +28,10 @@ const MenProductDetails = ({ params }) => {
     const [consumerComplaint, setConsumerComplaint] = useState(false)
     const [careInstruction, setCareInstruction] = useState(false)
     const [imagese, setImagese] = useState([])
-    // console.log(selectedColor)
-
+    const [data, setData] = useState([]);
+    const filterSimilirProduct = data.filter((el) => el.category == product?.category)
     useEffect(() => {
-
+        getProduct();
         if (params.id) {
             getProductDataById(params.id);
         }
@@ -40,10 +42,8 @@ const MenProductDetails = ({ params }) => {
     const handleColorSelection = (color) => {
         setSelectedColor(color);
     };
-    // console.log(selectedSize)
     const getProductDataById = (productId) => {
         getProductDetailsById(productId).then(res => {
-            // console.log(res.data)
             setProduct(res.data)
             setImagese(pre => {
                 return res.data.images.map(item => ({
@@ -53,6 +53,14 @@ const MenProductDetails = ({ params }) => {
             })
         }).catch(err => {
             console.log(err)
+        })
+    }
+    const getProduct = async () => {
+        await getProductData().then(res => {
+            setData(res.data)
+            setLoder(false)
+        }).catch(err => {
+            // console.log(err)
         })
     }
     const onPinCodeInput = (e) => {
@@ -399,6 +407,38 @@ const MenProductDetails = ({ params }) => {
             </div>
             <div className="text-center p-5">
                 <div className=" text-2xl">SIMILAR PRODUCTS</div>
+                <div className="grid grid-cols-3">
+                    <Carousel
+                         autoPlay={true}
+                         infiniteLoop={true}
+                         showStatus={true}
+                         showIndicators={true}
+                         showThumbs={false}
+                         interval={5000}
+                         showArrows={true}
+                         useKeyboardArrows={true}
+                    >
+                        {filterSimilirProduct.map((item) => (
+                            <div key={item._id} className="lg:w-64 lg:mt-1 lg:mx-1 sd:w-[-webkit-fill-available] shadow shadow-slate-900  border border-spacing-1 rounded md:w-[362px] p-2">
+                                <Link href={`/men/${item._id}`}>
+                                    <Image
+                                        style={{ width: '500px', height: '200px' }}
+                                        src={item.images[0]}
+                                        width={100}
+                                        height={0}
+                                        alt="Shoe Image"
+                                    />
+                                </Link>
+                                <div className="my-2 text-center text-sm">
+                                    <p style={{ fontFamily: 'futuramedium', fontSize: '13px' }}>{item.title}</p>
+                                    <p className="text-gray-600">{item.brand}</p>
+                                    <p style={{ fontFamily: 'futuramedium', fontSize: '13px' }}> Stok: {item.stock}</p>
+                                    <p style={{ fontFamily: 'futuramedium', fontSize: '13px' }}>Price:{item.price}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </Carousel>
+                </div>
             </div>
         </div>
     )
